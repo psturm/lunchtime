@@ -1,0 +1,33 @@
+{
+  "meteor": {},
+  "dependencies": {
+    "basePackages": {
+      "cron": {},
+      "iron-router": {},
+      "iron-router-auth": {},
+      "presence": {}
+    },
+    "packages": {
+      "cron": {
+        "git": "https://github.com/alexsuslov/Meteor.cron.git",
+        "tag": "v0.0.1",
+        "commit": "5216d14472fee7b692e8371aadc9f35f54ba9bb0"
+      },
+      "iron-router": {
+        "git": "https://github.com/EventedMind/iron-router.git",
+        "tag": "v0.6.2",
+        "commit": "ce56e58b45624dce992490f3a1c10f10d3948bae"
+      },
+      "iron-router-auth": {
+        "git": "https://github.com/XpressiveCode/iron-router-auth.git",
+        "tag": "v0.1.1",
+        "commit": "6cbba28b70b2ba960721d8440cad3b4dad915fb2"
+      },
+      "presence": {
+        "git": "https://github.com/dburles/meteor-presence.git",
+        "tag": "v0.4.1",
+        "commit": "ec4f872eb5b8acb0f4a8d4fcdfa439fcd61aa13b"
+      }
+    }
+  }
+}

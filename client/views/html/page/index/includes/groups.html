@@ -1,0 +1,98 @@
+<template name="groupList">
+    <h3>Groups</h3>
+    <ul class="list-group">
+        {{#each groups }}
+            {{> group }}
+        {{/each}}
+    </ul>
+</template>
+
+<template name="group">
+    <li class="list-group-item">
+        <span class="badge">
+            <span class="glyphicon glyphicon-user"></span>
+            {{ countGroupMembers }}
+        </span>
+
+        <h4 class="list-group-item-heading">{{ name }}</h4>
+
+        {{#if isGroupMember }}
+            <button type="button" class="btn btn-warning group-leave" style="float: right">Sry, i'm out</button>
+        {{else}}
+            <button type="button" class="btn btn-large btn-success group-join" style="float: right">Count me in!</button>
+        {{/if}}
+
+        <p>Time: {{ details.startTime }}</p>
+
+        {{#if isGroupMember }}
+            <h4>Today's Choice</h4>
+
+            {{#if choice }}
+                {{#if isGroupAdmin}}
+                    <button type="button" class="group-location-reset btn btn-warning" style="float: right">reset</button>
+                {{else}}
+                    <button type="button" class="group-location-reset btn btn-warning" disabled="disabled" style="float: right">reset</button>
+
+                {{/if}}
+            {{else}}
+                <button type="button" class="group-location-set-new btn btn-primary" style="float: right">
+                    <span class="glyphicon glyphicon-screenshot"></span> spin
+                </button>
+            {{/if}}
+
+
+            {{#if choice }}
+                <h3 class="text-success">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                    {{ choice.location.name }}
+                </h3>
+                <p>
+                    <small>
+                        {{ choiceDateText }}
+                        <br />
+                        by: {{ choice.user.username }}
+                    </small>
+                </p>
+            {{else}}
+                <p class="text-info"><em>no location yet</em></p>
+            {{/if}}
+
+
+
+            <h4>Members</h4>
+            <ul class="list-unstyled">
+                {{#each members }}
+                    {{> member }}
+                {{/each}}
+            </ul>
+
+            <h4>Possible Locations</h4>
+            <ul class="list-unstyled">
+                {{#each groupLocations }}
+                    {{> groupLocation }}
+                {{/each}}
+            </ul>
+        {{/if}}
+
+        <div class="clearfix"></div>
+    </li>
+</template>
+
+
+<template name="member">
+    <li class="">
+        {{ username }}
+    </li>
+</template>
+
+
+<template name="groupLocation">
+    <li class="">
+        {{ name }}
+
+        <span class="badge" style="float: right">
+            <span class="glyphicon glyphicon-star"></span>
+            {{ count }}
+        </span>
+    </li>
+</template>

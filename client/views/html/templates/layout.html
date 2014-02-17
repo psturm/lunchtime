@@ -1,0 +1,28 @@
+<template name="layout">
+    <div id="wrapper">
+
+        <header>
+            {{ loginButtons }}
+            <h1>
+                <span class="glyphicon glyphicon-cutlery"></span>
+                <span class="glyphicon glyphicon-time"></span>
+                LunchTime
+            </h1>
+        </header>
+
+        <div id="">{{> flashMessageList }}</div>
+
+        <section id="content">
+            {{ yield }}
+        </section>
+
+        {{> settings }}
+
+        <footer>
+            <small>&copy; 3001++ Berlin-West; for internal use only!</small>
+
+            <div>{{> debugging }}</div>
+        </footer>
+
+    <div>
+</template>

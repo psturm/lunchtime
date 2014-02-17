@@ -1,0 +1,32 @@
+<template name="minimal">
+
+    <ul id="nav">
+        <li><a href="{{ pathFor 'index' }}">full</a></nav></li>
+    </ul>
+
+
+    <div style="margin-top: 50px; text-align: center;">
+
+        {{#if group }}
+
+            {{#if group.choice.location.name }}
+                <span class="text-success" style="font-size: 100px;">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                    {{ group.choice.location.name }}
+                </span>
+
+            {{else}}
+                <em class="text-info ">no location yet</em>
+            {{/if}}
+
+        {{else}}
+
+            <em>Please join a lunch group!</em>
+
+        {{/if}}
+
+
+
+    </div>
+
+</template>

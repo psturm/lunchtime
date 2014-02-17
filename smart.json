@@ -1,0 +1,7 @@
+{
+  "packages": {
+    "cron": {},
+    "iron-router": {},
+    "iron-router-auth": {}
+  }
+}

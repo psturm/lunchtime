@@ -1,0 +1,26 @@
+<template name="flashMessageList">
+    <ul id="flash-messages" class="list-unstyled">
+    {{#each flashMessages }}
+        {{> flashMessage }}
+    {{/each}}
+    </ul>
+</template>
+
+<template name="flashMessage">
+    <li class="list-group-item {{ messageCssClass }}">
+
+        <!--<button type="button" class="close" aria-hidden="true">&times;</button>-->
+        <span class="flash-message-set-seen glyphicon glyphicon-remove-circle" style="float: right;"></span>
+
+
+        {{#if isStatusSuccess }}
+        <span class="glyphicon glyphicon-ok-sign"></span>
+        {{/if}}
+        {{#if isStatusError }}
+        <span class="glyphicon glyphicon-exclamation-sign"></span>
+        {{/if}}
+
+        {{ message }}
+
+    </li>
+</template>

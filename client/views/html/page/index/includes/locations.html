@@ -1,0 +1,35 @@
+<template name="locations">
+    <h3>Locations</h3>
+
+    <ul class="list-unstyled" id="location-list">
+        {{#each locations }}
+            {{> location }}
+        {{/each}}
+    </ul>
+</template>
+
+<template name="location">
+
+    <li class="list-group-item {{ cssClassHasVote }}">
+
+        <span class="badge" title="likes from all users: {{ score }}">{{ score }}</span>
+
+        {{#if hasVoteOfCurrentUser}}
+        <span class="badge location-vote location-vote-con" title="revoke like">
+            <span class="glyphicon glyphicon-star"></span>
+        </span>
+        {{else}}
+        <span class="badge location-vote location-vote-pro" title="like">
+            <span class="glyphicon glyphicon-star-empty"></span>
+        </span>
+        {{/if}}
+
+        <h4 class="list-group-item-heading">
+            {{ name }}
+        </h4>
+
+
+
+
+    </li>
+</template>

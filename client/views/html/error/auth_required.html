@@ -1,0 +1,18 @@
+<template name="authRequired">
+    <div class="widget" style="width: 500px;">
+
+        {{#if currentUser }}
+
+            <h3>Sorry, something went wrong</h3>
+            <a href="{{pathFor 'index'}}">Continue</a>
+
+        {{else}}
+
+            Please sign in to use this app. <br />
+            If you don't have an account yet, you can create an account for free.
+
+        {{/if}}
+
+
+    </div>
+</template>

@@ -1,0 +1,19 @@
+<template name="userList">
+
+    <h3>All Accounts</h3>
+    <ul class="list-group">
+      {{#each users}}
+        {{> user }}
+      {{/each}}
+    </ul>
+
+</template>
+
+<template name="user">
+    <li class="list-group-item {{ cssClassUser }}">
+
+        <span class="glyphicon glyphicon-user"></span>
+        {{username}}
+
+    </li>
+</template>
