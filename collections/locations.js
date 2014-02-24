@@ -3,16 +3,13 @@ Locations = new Meteor.Collection("locations");
 
 Locations.allow({
   insert: function (userId, doc) {
-    var user = Meteor.users.findOne( {_id: userId} );
-    return user && userHelper.isAdmin( user );
+    return userHelper.isAdmin( userId );
   },
   update: function (userId, doc, fields, modifier) {
-    var user = Meteor.users.findOne( {_id: userId} );
-    return user && userHelper.isAdmin( user );
+    return userHelper.isAdmin( userId );
   },
   remove: function (userId, doc) {
-    var user = Meteor.users.findOne( {_id: userId} );
-    return user && userHelper.isAdmin( user );
+    return userHelper.isAdmin( userId );
   },
   fetch: ['owner']
 });
