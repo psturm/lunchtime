@@ -2,16 +2,19 @@ Locations = new Meteor.Collection("locations");
 
 
 Locations.allow({
-  insert: function (userId, doc) {
-    return userHelper.isAdmin( userId );
+  insert: function ( userId, doc ) {
+    return permissions.allowedToEditDocument( userId, doc );
   },
-  update: function (userId, doc, fields, modifier) {
-    return userHelper.isAdmin( userId );
+  update: function ( userId, doc, fields, modifier ) {
+    // TODO: check modifier for userId changes
+    return userHelper.isAdmin();
   },
-  remove: function (userId, doc) {
-    return userHelper.isAdmin( userId );
+  remove: function ( userId, doc ) {
+    return permissions.allowedToEditDocument( userId, doc );
+    // TODO: implement cleaning of all votes for this location first!
+    return false;
   },
-  fetch: ['owner']
+  fetch: ['userId']
 });
 
 
@@ -43,5 +46,17 @@ Meteor.methods({
     Meteor.users.update(userId, userModifier);
 
     return true;
+  },
+
+  locationRemove : function ( location ) {
+
+    if ( permissions.allowedToEditDocument( Meteor.userId(), location ) ) {
+      Meteor.users.update( {}, {$pull: {locations: location._id}} );
+      Locations.remove( location._id );
+      return true;
+    } else {
+      throwError(403, 'Not allowed to remove this location.');
+    }
+
   }
 });

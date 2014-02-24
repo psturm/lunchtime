@@ -6,6 +6,16 @@
             {{> location }}
         {{/each}}
     </ul>
+
+
+    <button id="location-add-new" class="btn btn-default">Add new location</button>
+    {{#if showLocationEdit }}
+        <div id="location-edit" class="modal fade in show" role="dialog" tabindex="-1" aria-hidden="true">
+            {{> locationEdit }}
+        </div>
+    {{/if}}
+
+
 </template>
 
 <template name="location">
@@ -15,7 +25,7 @@
         <span class="badge" title="likes from all users: {{ score }}">{{ score }}</span>
 
         {{#if hasVoteOfCurrentUser}}
-        <span class="badge location-vote location-vote-con" title="revoke like">
+        <span class="badge location-vote location-vote-con clickable" title="revoke like">
             <span class="glyphicon glyphicon-star"></span>
         </span>
         {{else}}
@@ -24,12 +34,38 @@
         </span>
         {{/if}}
 
+        {{#if allowedToEdit }}
+        <span class="badge location-remove clickable" title="">
+            <span class="glyphicon glyphicon-trash"></span>
+        </span>
+        {{/if}}
+
         <h4 class="list-group-item-heading">
             {{ name }}
         </h4>
 
-
-
-
     </li>
+</template>
+
+
+<template name="locationEdit">
+    <div class="modal-header">
+        <a class="close closeLocationEdit" data-dismiss="modal">×</a>
+        <h3>Add new location</h3>
+    </div>
+    <form>
+        <div class="modal-body" >
+
+            <label for="locationName">Name</label>
+            <input type="text" id="locationName" name="locationName" />
+
+            <label for="locationNickname">Nickname</label>
+            <input type="text" id="locationNickname" name="locationNickname" />
+
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="btn btn-success">Add</a>
+            <a href="#" class="btn closeLocationEdit" data-dismiss="modal">Cancel</a>
+        </div>
+    </form>
 </template>

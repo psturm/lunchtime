@@ -61,7 +61,6 @@ Meteor.startup(function () {
     ["Japanese Deli", null],
     ["Honigmond", null],
     ["Yuuka", "Frittier-Asiate"],
-    ["Kyo", null],
     ["Vertigo", "Tellermann"]
   ];
 
