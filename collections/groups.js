@@ -39,7 +39,9 @@ Meteor.methods({
 
   },
   groupLocationReset: function ( group ) {
-    groupManager.resetAllGroupLocations();
+    if ( userHelper.isCurrentUserAdmin() ) {
+      groupManager.resetAllGroupLocations();
+    }
   }
 
 });
