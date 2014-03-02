@@ -42,6 +42,9 @@
 
         <h4 class="list-group-item-heading">
             {{ name }}
+            {{#if this.nickname }}
+                <small>{{ nickname }}</small>
+            {{/if}}
         </h4>
 
     </li>

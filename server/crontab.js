@@ -6,9 +6,9 @@
 
 var crontab = new Meteor.Cron( {
   events: {
-    "* * * * *"  : function() {
+    /*"* * * * *"  : function() {
       console.log('cron minute tick');
-    },
+    },*/
     "0 0 * * *"  : function() {
       console.log('CRON: resetting all group locations ...');
       groupManager.removeAllMembersFromAllGroups();

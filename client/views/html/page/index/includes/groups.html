@@ -28,11 +28,10 @@
             <h4>Today's Choice</h4>
 
             {{#if choice }}
-                {{#if isGroupAdmin}}
+                {{#if showResetButton }}
                     <button type="button" class="group-location-reset btn btn-warning" style="float: right">reset</button>
                 {{else}}
                     <button type="button" class="group-location-reset btn btn-warning" disabled="disabled" style="float: right">reset</button>
-
                 {{/if}}
             {{else}}
                 <button type="button" class="group-location-set-new btn btn-primary" style="float: right">
@@ -53,6 +52,17 @@
                         by: {{ choice.user.username }}
                     </small>
                 </p>
+
+
+                <div id="reset-status" style="float: right;">
+                    {{ resetStatusText }}
+                </div>
+                <div class="checkbox">
+                    <label for="group-reset-vote">
+                        <input type="checkbox" id="group-reset-vote" {{ checkedVoteForReset }}> vote for reset
+                    </label>
+                </div>
+
             {{else}}
                 <p class="text-info"><em>no location yet</em></p>
             {{/if}}
@@ -62,7 +72,13 @@
             <h4>Members</h4>
             <ul class="list-unstyled">
                 {{#each members }}
-                    {{> member }}
+                    <li class="">
+                        {{ username }}
+                        {{#if this.hasVotedForReset }}
+                            <span class="glyphicon glyphicon-flag text-error" title="voted for reset"></span>
+                        {{/if}}
+                    </li>
+
                 {{/each}}
             </ul>
 
@@ -80,8 +96,9 @@
 
 
 <template name="member">
-    <li class="">
-        {{ username }}
+
+
+
     </li>
 </template>
 

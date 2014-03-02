@@ -48,6 +48,7 @@ footer {
 #login-buttons #login-dropdown-list {
     width: 230px;
 }
+#clock { width: 200px; float: right; clear: right; text-align: right; }
 
 /*#location-list li:hover { background: #d9edf7; color: #31708f; }
 #location-list li:hover .location-vote { display: inline; }*/

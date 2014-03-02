@@ -23,12 +23,29 @@ Template.group.helpers({
   },
   isGroupAdmin: function () {
     return userHelper.isCurrentUserAdmin();
+  },
+  showResetButton: function () {
+    return permissions.canResetGroupLocation( this );
+  },
+  hasCurrentUserVotedForReset: function () {
+    return _.contains(this.resetVotes, Meteor.userId());
+  },
+  checkedVoteForReset: function () {
+    return _.contains(this.resetVotes, Meteor.userId()) ? 'checked' : '';
+  },
+  resetStatusText: function () {
+    var percentage = groupManager.getPercentageOfResetVotes( this );
+    return percentage*100 + '%'; // (' + countResetVotes + '/' + countMember + ')';
   }
 });
 
 
 Template.group.members = function () {
-  return userHelper.getUsersByIds( this.members );
+  var group = this;
+  return userHelper.getUsersByIds( this.members).map(function(member){
+    member.hasVotedForReset = _.contains( group.resetVotes, member._id );
+    return member;
+  });
 };
 
 Template.group.choiceDateText = function () {
@@ -68,7 +85,7 @@ Template.group.events({
   'click .group-location-set-new' : function () {
     Meteor.call('groupSetNewRandomLocation', this, function (error, result) {
       if (error) {
-        flashMessenger.add('Failed to reset group location!', flashMessenger.status.error);
+        flashMessenger.add('Failed to set new group location!', flashMessenger.status.error);
       }
     });
   },
@@ -76,6 +93,15 @@ Template.group.events({
     Meteor.call('groupLocationReset', this, function (error, result) {
       if (error) {
         flashMessenger.add('Failed to reset group location!', flashMessenger.status.error);
+      }
+    });
+  },
+
+
+  'click #group-reset-vote' : function () {
+    Meteor.call('groupResetVoteToggle', this, function (error, result) {
+      if (error) {
+        flashMessenger.add('Failed to vote for reset!', flashMessenger.status.error);
       }
     });
   }
