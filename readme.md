@@ -1,3 +1,5 @@
+*This project is outdated!*
+
 # LunchTime
 
 Simple [Meteor](https://www.meteor.com/) application to quickly decide for a lunch location based on preferences of all members.

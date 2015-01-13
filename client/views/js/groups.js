@@ -1,9 +1,11 @@
 
 // Location list
 
-Template.groupList.groups = function () {
-  return Groups.find({}, {sort: {name: 1}});
-};
+Template.groupList.helpers({
+    groups: function () {
+      return Groups.find({}, {sort: {name: 1}});
+    }
+});
 
 
 
@@ -27,6 +29,9 @@ Template.group.helpers({
   showResetButton: function () {
     return permissions.canResetGroupLocation( this );
   },
+  disabledResetButton: function () {
+    return permissions.canResetGroupLocation( this ) ? '' : 'disabled';
+  },
   hasCurrentUserVotedForReset: function () {
     return _.contains(this.resetVotes, Meteor.userId());
   },
@@ -34,35 +39,37 @@ Template.group.helpers({
     return _.contains(this.resetVotes, Meteor.userId()) ? 'checked' : '';
   },
   resetStatusText: function () {
-    var percentage = groupManager.getPercentageOfResetVotes( this );
-    return percentage*100 + '%'; // (' + countResetVotes + '/' + countMember + ')';
+    var percentage = Math.round( groupManager.getPercentageOfResetVotes( this ) * 100 );
+    return percentage + '%';
   }
 });
 
 
-Template.group.members = function () {
-  var group = this;
-  return userHelper.getUsersByIds( this.members).map(function(member){
-    member.hasVotedForReset = _.contains( group.resetVotes, member._id );
-    return member;
-  });
-};
+Template.group.helpers({
 
-Template.group.choiceDateText = function () {
-  if ( this.choice && this.choice.date ) {
-    var date = new Date( this.choice.date );
-    return date.toString();
-  } else {
-    return '';
-  }
-};
+    members: function () {
+      var group = this;
+      return userHelper.getUsersByIds( this.members).map(function(member){
+        member.hasVotedForReset = _.contains( group.resetVotes, member._id );
+        return member;
+      });
+    },
+
+    choiceDateText : function () {
+      if ( this.choice && this.choice.date ) {
+        var date = new Date( this.choice.date );
+        return date.toString();
+      } else {
+        return '';
+      }
+    },
 
 
-
-Template.group.groupLocations = function () {
-  var locationIdsMultiple = userHelper.getLocationsByUserIds( this.members );
-  return locationHelper.getAllSortedLocationsByIdsMultiple( locationIdsMultiple );
-};
+    groupLocations : function () {
+      var locationIdsMultiple = userHelper.getLocationsByUserIds( this.members );
+      return locationHelper.getAllSortedLocationsByIdsMultiple( locationIdsMultiple );
+    }
+});
 
 Template.group.events({
   'click .group-join' : function ( ev, tmpl ) {

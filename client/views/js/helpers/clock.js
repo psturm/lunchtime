@@ -1,7 +1,9 @@
 
-Template.clock.currentTime = function () {
-  return clock.getCurrentTime();
-};
+Template.clock.helpers({
+    currentTime : function () {
+        return clock.getCurrentTime();
+    }
+});
 
 
 clock = {

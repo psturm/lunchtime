@@ -2,7 +2,7 @@
     <div id="wrapper">
 
         <header>
-            {{ loginButtons }}
+            {{> loginButtons }}
 
             {{> clock }}
 
@@ -16,7 +16,7 @@
         <div id="">{{> flashMessageList }}</div>
 
         <section id="content">
-            {{ yield }}
+            {{> index }}
         </section>
 
         {{> settings }}
@@ -27,5 +27,5 @@
             <div>{{> debugging }}</div>
         </footer>
 
-    <div>
+    </div>
 </template>

@@ -11,8 +11,6 @@ Locations.allow({
   },
   remove: function ( userId, doc ) {
     return permissions.allowedToEditDocument( userId, doc );
-    // TODO: implement cleaning of all votes for this location first!
-    return false;
   },
   fetch: ['userId']
 });

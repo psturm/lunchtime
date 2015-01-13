@@ -28,11 +28,22 @@
             <h4>Today's Choice</h4>
 
             {{#if choice }}
-                {{#if showResetButton }}
-                    <button type="button" class="group-location-reset btn btn-warning" style="float: right">reset</button>
+
+                {{#if hasCurrentUserVotedForReset }}
+                <button type="button" id="group-reset-vote" class="btn btn-danger" title="revoke vote for reset" style="float: right; margin-left: 5px;">
+                    <span class="glyphicon glyphicon-flag"></span>
+                </button>
                 {{else}}
-                    <button type="button" class="group-location-reset btn btn-warning" disabled="disabled" style="float: right">reset</button>
+                <button type="button" id="group-reset-vote" class="btn btn-default" title="vote for reset" style="float: right; margin-left: 5px;">
+                    <span class="glyphicon glyphicon-flag text-error"></span>
+                </button>
                 {{/if}}
+
+                <button type="button" class="group-location-reset btn btn-warning" {{disabledResetButton}} style="float: right">
+                    reset
+                    <small>({{ resetStatusText }})</small>
+                </button>
+
             {{else}}
                 <button type="button" class="group-location-set-new btn btn-primary" style="float: right">
                     <span class="glyphicon glyphicon-screenshot"></span> spin
@@ -45,23 +56,10 @@
                     <span class="glyphicon glyphicon-chevron-right"></span>
                     {{ choice.location.name }}
                 </h3>
+
                 <p>
-                    <small>
-                        {{ choiceDateText }}
-                        <br />
-                        by: {{ choice.user.username }}
-                    </small>
+                    <small>{{ choiceDateText }} by {{ choice.user.username }}</small>
                 </p>
-
-
-                <div id="reset-status" style="float: right;">
-                    {{ resetStatusText }}
-                </div>
-                <div class="checkbox">
-                    <label for="group-reset-vote">
-                        <input type="checkbox" id="group-reset-vote" {{ checkedVoteForReset }}> vote for reset
-                    </label>
-                </div>
 
             {{else}}
                 <p class="text-info"><em>no location yet</em></p>
@@ -97,9 +95,6 @@
 
 <template name="member">
 
-
-
-    </li>
 </template>
 
 

@@ -1,9 +1,7 @@
 
 
 Template.minimal.helpers({
-
+    group : function () {
+        return Groups.findOne({members: Meteor.userId()});
+    }
 });
-
-Template.minimal.group = function () {
-  return Groups.findOne({members: Meteor.userId()});
-};

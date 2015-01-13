@@ -1,9 +1,11 @@
 
 // Location list
 
-Template.locations.locations = function () {
-  return Locations.find({}, {sort: {score: -1, name: 1}});
-};
+Template.locations.helpers({
+    locations : function () {
+      return Locations.find({}, {sort: {score: -1, name: 1}});
+    }
+});
 
 Template.locations.helpers({
   showLocationEdit: function () {

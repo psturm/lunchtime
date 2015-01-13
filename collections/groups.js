@@ -19,11 +19,11 @@ Meteor.methods({
 
 
   groupSetNewRandomLocation: function ( group ) {
-
-    if (! group.choice ) {
-
+    if ( Meteor.isServer && ! group.choice ) {
       var locationIdsMultiple = userHelper.getLocationsByUserIds( group.members );
+      console.log('locationIdsMultiple', locationIdsMultiple);
       var randomIdx = Math.floor(Math.random() * locationIdsMultiple.length);
+      console.log('randomIdx', randomIdx);
       var randomLocationId = locationIdsMultiple[randomIdx];
       var randomLocation = locationHelper.getLocationById( randomLocationId );
 
@@ -55,12 +55,6 @@ Meteor.methods({
     } else {
       group.resetVotes.push( userId );
       Groups.update({_id: group._id}, {$addToSet: {resetVotes: userId}});
-
-      /*if ( groupManager.isPercentageOfResetVotesCritical(group) ) {
-        groupManager.resetGroupLocation( group );
-        Groups.update({_id: group._id}, {$set: {resetVotes: [] }});
-      }*/
-
     }
   }
 
